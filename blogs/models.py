@@ -28,7 +28,7 @@ class Blog(models.Model):
     # blank=True → slug can be auto-generated
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    # Links blog to a category (one category → many blogs)
+    # Links blog to a category (one category → many blogs) 
     # CASCADE → delete blogs if category is deleted
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
