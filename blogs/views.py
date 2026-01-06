@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 from .models import Blog,Category
+from django.db.models import Q
 # Create your views here.
 def posts_by_category(request, category_id):
     #fetch the post thats belongs to category with id and category_id
@@ -17,3 +18,19 @@ def posts_by_category(request, category_id):
     }
     
     return render(request,'post_by_category.html',context) 
+
+def blogs(request,slug):
+    single_blog=get_object_or_404(Blog,slug=slug, status='Published')
+    context= {
+        'single_blog':single_blog ,
+    }
+    return render(request,'blogs.html',context)
+
+def search(request):
+    keyword=request.GET.get('keyword')
+    blogs=Blog.objects.filter(Q(title__icontains=keyword) | Q(short_description__icontains=keyword)| Q(blog_body__icontains=keyword) , status='Published' ) # , is and oprator | it means or operator so to use operator we have to iimport Q means Querry set  and there i means any uppercase and lowercase is allow
+    context={
+        'blogs':blogs,
+        'keyword':keyword,
+    }
+    return render(request,'search.html' , context)
