@@ -26,6 +26,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
    
     path('blogs/search/',BlogsView.search,name='search'),
-     path('<slug:slug>/',BlogsView.blogs, name='blogs'), #slug info
+    path('blogs/<slug:slug>/',BlogsView.blogs, name='blogs'), #slug info
     #search endpoint
+    path('register/',views.register,name='register'),
+    path('login/',views.login , name='login'),
+    path('logout/',views.logout,name="logout"),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) #“This line maps media URLs to the media directory so Django can serve uploaded files during development.”
