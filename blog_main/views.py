@@ -47,7 +47,7 @@ def login(request):
             user=auth.authenticate(username=username,password=password)
             if user is not None:
                 auth.login(request,user)
-            return redirect('home')
+            return redirect('dashboard')
     form=AuthenticationForm()   # we dont need any extra field thats why authentication and when we need to create then it will userrregistration()
     context={
         'form':form,
