@@ -60,3 +60,15 @@ class Blog(models.Model):
 
     def __str__(self): #its used for admin panel not to return object1 return name
         return self.title
+
+class Comment(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)#blog is deleted then comments also will deleted
+    blog=models.ForeignKey(Blog,on_delete=models.CASCADE)
+    comment=models.TextField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add=True)
+    # Stores date & time when blog is created
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.comment
